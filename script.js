@@ -2,10 +2,8 @@ let classesData = [];
 let currentTableData = [];
 let selectedCols = ["Timestamp", "Are you student or Auditor ? / நீங்கள் மாணவரா அல்லது ஆய்வாளரா?", "Name / பெயர்", "Fees Paid / கட்டணம் செலுத்தப்பட்டதா?"];
 
-// Load classes.json
-async function loadClasses() {
-  const res = await fetch("classes.json");
-  classesData = await res.json();
+// Load from script instead of JSON
+function loadClasses() {
   let dropdown = document.getElementById("class-dropdown");
   dropdown.innerHTML = "";
   classesData.forEach((c, i) => {

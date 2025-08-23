@@ -28,8 +28,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "wetrusteditor-gif"
+          git config user.email "wetrusteditor@gmail.com"
           git add classes.json
           git commit -m "Auto-update classes.json from Excel" || echo "No changes to commit"
           git push

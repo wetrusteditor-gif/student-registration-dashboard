@@ -35,18 +35,6 @@
       "dates": "21 to 23 November 2025",
       "sheetId": "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y",
       "active": true
-    },
-    "grade9": {
-      "name": "Grade 9",
-      "dates": "15 to 18 March 2026",
-      "sheetId": "your_new_sheet_id_here",
-      "active": false
-    },
-    "grade2": {
-      "name": "Grade 2",
-      "dates": "10 to 12 August 2025",
-      "sheetId": "another_sheet_id_here",
-      "active": false
     }
   },
   "settings": {

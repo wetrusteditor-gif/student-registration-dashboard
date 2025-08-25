@@ -18,6 +18,8 @@ const summaryEl   = document.getElementById("summary");
 const lastUpdated = document.getElementById("lastUpdated");
 const refreshBtn  = document.getElementById("refreshBtn");
 const overlay     = document.getElementById("loadingOverlay");
+const copyAllWrap = document.getElementById("copyAllWrap");
+const copyAllBtn  = document.getElementById("copyAllBtn");
 
 // ===== Seminar dates with weekday + TZ =====
 function formatSeminarDates([startISO, endISO]) {
@@ -130,6 +132,15 @@ function getTypeBadge(val) {
                    : '<span class="auditor-badge">Auditor / ஆய்வாளர்</span>';
 }
 
+// ===== Map mode for copying (Offline -> Direct) =====
+function mapModeForCopy(modeRaw = "") {
+  const m = modeRaw.toLowerCase();
+  if (m.includes("direct") || m.includes("நேரடி")) return "Direct";
+  if (m.includes("online")  || m.includes("ஆன்லைன்"))  return "Online";
+  if (m.includes("hybrid")  || m.includes("கலப்பு"))   return "Hybrid";
+  return "Not Specified";
+}
+
 // ===== Last updated =====
 function updateLastUpdated() {
   const now = new Date();
@@ -165,6 +176,7 @@ async function loadGradeData(gradeKey) {
           No registration data found for this grade<br/>இந்த வகுப்பிற்கு பதிவு தரவு கிடைக்கவில்லை
         </td></tr>`;
       summaryEl.style.display = "none";
+      copyAllWrap.style.display = "none";
       showLoading(false);
       return;
     }
@@ -192,7 +204,7 @@ async function loadGradeData(gradeKey) {
     document.getElementById("auditorCount").textContent  = auditors;
     summaryEl.style.display = "block";
 
-    // Table (desktop layout on all screens; horizontal scroll on small)
+    // Table (desktop layout; horizontal scroll on small)
     tableBody.innerHTML = data.map(r => `
       <tr>
         <td>${formatTimestamp(r.timestamp)}</td>
@@ -203,6 +215,37 @@ async function loadGradeData(gradeKey) {
       </tr>
     `).join("");
 
+    // ----- Build copy-all payload with grade title -----
+    const lines = data
+      .map(r => {
+        const name = (r.name || "").trim();
+        if (!name) return null;
+        return `${name} - ${mapModeForCopy(r.mode || "")}`;
+      })
+      .filter(Boolean);
+
+    if (lines.length > 0) {
+      const gradeTitle = `${info.name} (${formatSeminarDates(info.dates)})`;
+      const copyText = [gradeTitle, ""].concat(lines).join("\n");
+
+      copyAllWrap.style.display = "flex";
+      copyAllBtn.textContent = `📋 Copy Names & Modes (${lines.length})`;
+
+      copyAllBtn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(copyText);
+          const original = copyAllBtn.textContent;
+          copyAllBtn.textContent = "✅ Copied!";
+          setTimeout(() => (copyAllBtn.textContent = original), 1500);
+        } catch {
+          alert("Copy failed. Please try manually.");
+        }
+      };
+    } else {
+      copyAllWrap.style.display = "none";
+    }
+    // -----------------------------------------------
+
     updateLastUpdated();
   } catch (e) {
     console.error(e);
@@ -211,6 +254,7 @@ async function loadGradeData(gradeKey) {
         Error loading data. Please try again later.<br/>தரவை ஏற்றுவதில் பிழை. பின்னர் முயற்சிக்கவும்.
       </td></tr>`;
     summaryEl.style.display = "none";
+    copyAllWrap.style.display = "none";
   } finally {
     showLoading(false);
   }
@@ -225,6 +269,7 @@ gradeSelect.addEventListener("change", async e => {
   const key = e.target.value;
   if (!key) {
     summaryEl.style.display = "none";
+    copyAllWrap.style.display = "none";
     tableBody.innerHTML = `
       <tr><td colspan="5" class="no-data">
         Please select a grade to view registration data<br/>

@@ -1,72 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Registration Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Registration Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<div class="container">
+  <div class="container">
     <div class="header">
-        <h1>Student Registration Dashboard</h1>
+      <h1>Student Registration Dashboard</h1>
+      <p id="lastUpdated" class="last-updated">Last Updated: --</p>
     </div>
 
     <div class="controls">
-        <select id="gradeSelect">
-            <option value="">Select Grade</option>
-        </select>
-        <button class="refresh-btn" id="refreshBtn">🔄 Refresh Data</button>
+      <select id="gradeSelect">
+        <option value="">Select Grade / வகுப்பைத் தேர்ந்தெடுக்கவும்</option>
+      </select>
+      <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
     </div>
 
-    <div id="lastUpdated" style="text-align:center; margin-bottom:15px; font-size:0.9rem; color:#555;"></div>
-
-    <div id="summary" class="summary" style="display: none;">
-        <h3>Class Summary</h3>
-        <div class="summary-grid">
-            <div class="summary-item">
-                <span class="number" id="totalStudents">0</span>
-                <span class="label">Total Registrations</span>
-            </div>
-            <div class="summary-item">
-                <span class="number" id="paidCount">0</span>
-                <span class="label">Fees Paid</span>
-            </div>
-            <div class="summary-item">
-                <span class="number" id="unpaidCount">0</span>
-                <span class="label">Fees Pending</span>
-            </div>
-            <div class="summary-item">
-                <span class="number" id="studentCount">0</span>
-                <span class="label">Students</span>
-            </div>
-            <div class="summary-item">
-                <span class="number" id="auditorCount">0</span>
-                <span class="label">Auditors</span>
-            </div>
+    <div id="summary" class="summary" style="display:none;">
+      <h3>Class Summary / வகுப்பு சுருக்கம்</h3>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="number" id="totalStudents">0</span>
+          <span class="label">Total Registrations<br/>மொத்த பதிவுகள்</span>
         </div>
+        <div class="summary-item">
+          <span class="number" id="paidCount">0</span>
+          <span class="label">Fees Paid<br/>கட்டணம் செலுத்தியவர்கள்</span>
+        </div>
+        <div class="summary-item">
+          <span class="number" id="unpaidCount">0</span>
+          <span class="label">Fees Pending<br/>கட்டணம் நிலுவையில்</span>
+        </div>
+        <div class="summary-item">
+          <span class="number" id="studentCount">0</span>
+          <span class="label">Students<br/>மாணவர்கள்</span>
+        </div>
+        <div class="summary-item">
+          <span class="number" id="auditorCount">0</span>
+          <span class="label">Auditors<br/>ஆய்வாளர்கள்</span>
+        </div>
+      </div>
     </div>
 
     <div class="table-container">
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Mode of Attendance</th>
-                    <th>Fees Status</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <tr>
-                    <td colspan="5" class="no-data">Please select a grade to view registration data</td>
-                </tr>
-            </tbody>
-        </table>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Timestamp<br/>நேர முத்திரை</th>
+            <th>Student/Auditor<br/>மாணவர்/ஆய்வாளர்</th>
+            <th>Name<br/>பெயர்</th>
+            <th>Mode of Attendance<br/>பங்கேற்பு முறை</th>
+            <th>Fees Status<br/>கட்டணம் நிலை</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr>
+            <td colspan="5" class="no-data">
+              Please select a grade to view registration data<br/>
+              பதிவு தரவைப் பார்க்க ஒரு வகுப்பைத் தேர்ந்தெடுக்கவும்
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
 
-<script src="script.js"></script>
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" class="overlay hidden">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <span>Loading data…</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

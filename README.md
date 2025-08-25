@@ -1,151 +1,221 @@
-# Student Registration Dashboard
+Student Registration Dashboard
 
-A bilingual (English/Tamil) web dashboard for managing student registrations across different grade seminars.
+A responsive web dashboard to view student/auditor registrations for HUE seminars.
+It fetches live data directly from Google Sheets and displays it with:
 
-## Features
+📊 Summary cards (total, paid, unpaid, students, auditors)
 
-- **Bilingual Support**: All interface elements in English and Tamil
-- **Grade Management**: Easy dropdown selection for different grades
-- **Real-time Data**: Auto-refreshes every 5 minutes
-- **Summary Statistics**: Shows total registrations, fees status, student/auditor counts
-- **Mode of Attendance**: Tracks Online, Offline, and Hybrid attendance
-- **Responsive Design**: Works on desktop and mobile devices
-- **JSON Configuration**: Easy class management without code changes
+📅 Localized timestamps (weekday + time zone)
 
-## Files Structure
+📱 Mobile-friendly layout (table → card view on phones)
 
-```
-├── index.html          # Main dashboard file
-├── classes.json        # Configuration for grades/classes
-├── data.json          # Sample/actual student data
-└── README.md          # This file
-```
+🔄 Manual refresh & auto-refresh (every 5 minutes)
 
-## Setup Instructions
+🌐 Works with any published Google Sheet in CSV mode
 
-### 1. GitHub Pages Deployment
+🚀 Features
 
-1. Create a new repository on GitHub
-2. Upload all files (`index.html`, `classes.json`, `data.json`, `README.md`)
-3. Go to repository Settings → Pages
-4. Select "Deploy from a branch" → "main branch"
-5. Your dashboard will be live at: `https://yourusername.github.io/repository-name`
+Dropdown with seminar grades & dates
 
-### 2. Adding/Removing Classes
+Live fetch from Google Sheets CSV export
 
-Edit `classes.json` to manage your seminars:
+Responsive summary statistics
 
-**To Add a New Class:**
-```json
-"grade9": {
-  "name": "Grade 9",
-  "dates": "15 to 18 March 2026",
-  "sheetId": "your_google_sheet_id_here",
-  "active": true
-}
-```
+Styled badges for paid/unpaid, student/auditor, mode (online/offline/hybrid)
 
-**To Hide a Class:**
-```json
-"grade8": {
-  "name": "Grade 8", 
-  "dates": "28 December 2025 to 04 January 2026",
-  "sheetId": "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk",
-  "active": false
-}
-```
+Loading overlay while data fetches
 
-**To Remove a Class Completely:**
-Delete the entire entry from `classes.json`
+Auto-updates every 5 minutes
 
-### 3. Connecting Real Google Sheets Data
+📂 Project Structure
+student-dashboard/
+│
+├── index.html    # Main UI
+├── script.js     # Logic (fetch, render, refresh, auto-refresh)
+├── style.css     # Styling (desktop + mobile responsive)
+└── README.md     # Project documentation
 
-#### Option 1: Public Sheets (Easiest)
-1. Make your Google Sheets public (View only)
-2. Replace sample data in `data.json` with real data
-3. Use Google Sheets API or Google Apps Script for automatic updates
+⚙️ Setup
 
-#### Option 2: Google Apps Script (Recommended)
-1. Create a Google Apps Script project
-2. Write a script to read your private sheets
-3. Deploy as web app
-4. Modify dashboard to fetch from your script URL
+Google Sheet Setup
 
-#### Option 3: CSV Export
-1. Export each sheet as CSV
-2. Upload CSV files to repository
-3. Modify dashboard to read CSV files using Papa Parse
+Open your Google Form’s response sheet.
 
-## Data Format
+Click File → Share → Publish to web.
 
-Each student record should include:
+Or ensure Anyone with the link → Viewer.
 
-```json
-{
-  "timestamp": "2024-12-20 10:30:00",
-  "type": "Student / மாணவர்",
-  "name": "Student Name / மாணவர் பெயர்",
-  "modeOfAttendance": "Online / ஆன்லைன்",
-  "feesPaid": "Yes / ஆம்"
-}
-```
+Copy the Sheet ID from the URL:
 
-### Supported Values:
+https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit#gid=0
 
-**Type / மாணவர் வகை:**
-- "Student / மாணவர்"
-- "Auditor / ஆய்வாளர்"
 
-**Mode of Attendance / பங்கேற்பு முறை:**
-- "Online / ஆன்லைன்"
-- "Offline / ஆஃப்லைன்"  
-- "Hybrid / கலப்பு"
+Add the sheet ID in script.js under appConfig.classes.
 
-**Fees Status / கட்டணம் நிலை:**
-- "Yes / ஆம்" (Paid)
-- "No / இல்லை" (Pending)
+Local Preview
 
-## Customization
+Open index.html in your browser.
 
-### Colors
-Modify CSS variables in `index.html` to change the color scheme.
+Select a grade → it will fetch live data from the sheet.
 
-### Languages
-Add more language support by extending the bilingual text patterns in JavaScript.
+Deploy (Recommended: GitHub Pages / Netlify / Vercel)
 
-### Refresh Interval
-Change auto-refresh timing in `classes.json` under settings:
-```json
-"settings": {
-  "autoRefreshInterval": 300000
-}
-```
+Upload the three files (index.html, style.css, script.js).
 
-## Browser Support
+Ensure sheet access is public.
 
-- Chrome 60+
-- Firefox 60+
-- Safari 12+
-- Edge 79+
+Open your deployed URL and test.
 
-## Contributing
+📱 Mobile View
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+On tablets → table scrolls horizontally if wide.
 
-## License
+On phones → table turns into card-style layout with per-cell labels.
 
-This project is open source and available under the [MIT License](LICENSE).
+Controls and summary auto-stack for smaller screens.
 
-## Support
+🔄 Refresh Logic
 
-For issues and questions:
-1. Check existing issues in GitHub
-2. Create a new issue with detailed description
-3. Include screenshots if applicable
+Manual: Press Refresh button.
 
----
+Auto: Every 5 minutes (configurable in script.js → appConfig.settings.autoRefreshInterval).
 
-**Note**: Remember to keep your Google Sheets data secure and never commit sensitive information to public repositories.
+🛠 Customization
+
+🎨 Update style.css to change colors or layout.
+
+📝 Update appConfig in script.js to add/remove seminar grades.
+
+🕒 Adjust auto-refresh interval or disable it entirely.
+
+✅ Requirements
+
+Modern browser (Chrome, Edge, Firefox, Safari).
+
+Google Sheet must be public or published.
+
+📸 Demo Screenshot (optional)
+
+Add a screenshot here once deployed.
+
+Would you like me to also include example Google Sheet column headers in the README so anyone setting it up knows exactly what headers (Timestamp, Student/Auditor, Name, Mode, Fees) are expected?
+
+You said:
+yes
+ChatGPT said:
+
+Perfect 👍 Here’s the updated README.md with example Google Sheet headers so anyone can configure it easily:
+
+Student Registration Dashboard
+
+A responsive web dashboard to view student/auditor registrations for HUE seminars.
+It fetches live data directly from Google Sheets and displays it with:
+
+📊 Summary cards (total, paid, unpaid, students, auditors)
+
+📅 Localized timestamps (weekday + time zone)
+
+📱 Mobile-friendly layout (table → card view on phones)
+
+🔄 Manual refresh & auto-refresh (every 5 minutes)
+
+🌐 Works with any published Google Sheet in CSV mode
+
+🚀 Features
+
+Dropdown with seminar grades & dates
+
+Live fetch from Google Sheets CSV export
+
+Responsive summary statistics
+
+Styled badges for paid/unpaid, student/auditor, mode (online/offline/hybrid)
+
+Loading overlay while data fetches
+
+Auto-updates every 5 minutes
+
+📂 Project Structure
+student-dashboard/
+│
+├── index.html    # Main UI
+├── script.js     # Logic (fetch, render, refresh, auto-refresh)
+├── style.css     # Styling (desktop + mobile responsive)
+└── README.md     # Project documentation
+
+⚙️ Setup
+1. Google Sheet Setup
+
+Open your Google Form’s response sheet (or create your own Google Sheet).
+
+Ensure it has the following headers (row 1):
+
+Timestamp	Student/Auditor / நீங்கள் மாணவரா அல்லது ஆய்வாளரா?	Name / பெயர்	Mode of Attendance / பங்கேற்பு முறை	Fees Paid / கட்டணம் செலுத்தப்பட்டதா?
+
+✅ Example rows:
+
+Timestamp	Student/Auditor	Name	Mode of Attendance	Fees Paid
+2025-08-20 10:30:00	Student	Arjun Kumar	Online	Yes
+2025-08-20 11:15:00	Auditor	Priya Sharma	Offline	No
+2025-08-20 14:45:00	Student	Ravi Patel	Hybrid	Yes
+
+⚠️ Header text can be in English or Tamil (the app auto-detects both).
+
+Make the sheet publicly viewable:
+
+File → Share → Publish to web
+
+OR Share → Anyone with the link → Viewer
+
+Copy the Sheet ID from the URL:
+
+https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit#gid=0
+
+
+Add the sheet ID in script.js under appConfig.classes.
+
+2. Local Preview
+
+Open index.html in your browser.
+
+Select a grade → it will fetch live data from the sheet.
+
+3. Deploy (Recommended: GitHub Pages / Netlify / Vercel)
+
+Upload the three files (index.html, style.css, script.js).
+
+Ensure your sheet is public.
+
+Open your deployed URL and test.
+
+📱 Mobile View
+
+On tablets → table scrolls horizontally if wide.
+
+On phones → table turns into card-style layout with per-cell labels.
+
+Controls and summary auto-stack for smaller screens.
+
+🔄 Refresh Logic
+
+Manual: Press Refresh button.
+
+Auto: Every 5 minutes (configurable in script.js → appConfig.settings.autoRefreshInterval`).
+
+🛠 Customization
+
+🎨 Update style.css to change colors or layout.
+
+📝 Update appConfig in script.js to add/remove seminar grades.
+
+🕒 Adjust auto-refresh interval or disable it entirely.
+
+✅ Requirements
+
+Modern browser (Chrome, Edge, Firefox, Safari).
+
+Google Sheet must be public or published.
+
+📸 Demo Screenshot (optional)
+
+Add a screenshot here once deployed.

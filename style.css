@@ -82,6 +82,28 @@ tr:hover { background: #f8f9ff; }
 .mode-hybrid  { background: #7c3aed; }
 .mode-unknown { background: #6b7280; }
 
+/* Copy-all button */
+.copy-all-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0 0;
+}
+.copy-all-btn {
+  background: #e5e7eb;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.copy-all-btn:hover { background: #d1d5db; }
+.copy-all-btn:active { transform: scale(0.98); background: #cbd5e1; }
+@media (max-width: 640px) {
+  .copy-all-wrap { justify-content: stretch; }
+  .copy-all-btn  { width: 100%; }
+}
+
 /* Overlay loader */
 .overlay {
   position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;

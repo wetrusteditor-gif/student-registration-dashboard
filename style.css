@@ -70,7 +70,7 @@ tr:hover { background: #f8f9ff; }
 .no-data { text-align: center; padding: 28px; color:#666; font-style: italic; }
 
 /* Badges */
-.status-paid, .status-unpaid, .student-badge, .auditor-badge, .mode-online, .mode-offline, .mode-hybrid, .mode-unknown {
+.status-paid, .status-unpaid, .student-badge, .auditor-badge, .mode-online, .mode-direct, .mode-hybrid, .mode-unknown {
   display: inline-block; padding: 4px 10px; border-radius: 16px; font-size: .82rem; color: #fff; white-space: normal; line-height: 1.2;
 }
 .status-paid { background: #10b981; }
@@ -78,7 +78,7 @@ tr:hover { background: #f8f9ff; }
 .student-badge { background: #3b82f6; }
 .auditor-badge { background: #8b5cf6; }
 .mode-online  { background: #06b6d4; }
-.mode-offline { background: #f59e0b; }
+.mode-direct { background: #f59e0b; }
 .mode-hybrid  { background: #7c3aed; }
 .mode-unknown { background: #6b7280; }
 

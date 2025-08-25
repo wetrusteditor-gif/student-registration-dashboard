@@ -78,7 +78,7 @@ tr:hover { background: #f8f9ff; }
 .student-badge { background: #3b82f6; }
 .auditor-badge { background: #8b5cf6; }
 .mode-online  { background: #06b6d4; }
-.mode-offline { background: #f59e0b; }
+.mode-direct { background: #f59e0b; }
 .mode-hybrid  { background: #7c3aed; }
 .mode-unknown { background: #6b7280; }
 

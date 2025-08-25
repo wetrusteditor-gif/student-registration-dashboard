@@ -1,647 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration Dashboard</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .header h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .controls {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        select {
-            padding: 12px 20px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            background: white;
-            font-size: 16px;
-            cursor: pointer;
-            min-width: 200px;
-            transition: all 0.3s ease;
-        }
-
-        select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
-        }
-
-        .summary {
-            background: linear-gradient(135deg, #f6f9fc 0%, #e9f2ff 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #667eea;
-        }
-
-        .summary h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .summary-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary-item .number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-            display: block;
-        }
-
-        .summary-item .label {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        .table-container {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 18px 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            vertical-align: top;
-        }
-
-        tr:hover {
-            background-color: #f8f9ff;
-            transition: background-color 0.2s ease;
-        }
-
-        .status-paid {
-            background: #10b981;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .status-unpaid {
-            background: #ef4444;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .student-badge {
-            background: #3b82f6;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .auditor-badge {
-            background: #8b5cf6;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .mode-online {
-            background: #06b6d4;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .mode-offline {
-            background: #f59e0b;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .mode-hybrid {
-            background: #8b5cf6;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .mode-unknown {
-            background: #6b7280;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-style: italic;
-        }
-
-        .refresh-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.2s ease;
-        }
-
-        .refresh-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            select {
-                min-width: 100%;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 12px 8px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Student Registration Dashboard</h1>
-            <p>மாணவர் பதிவு டாஷ்போர்டு</p>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>Student Registration Dashboard</h1>
+    </div>
 
-        <div class="controls">
-            <div class="dropdown">
-                <select id="gradeSelect">
-                    <option value="">Select Grade / வகுப்பைத் தேர்ந்தெடுக்கவும்</option>
-                    <option value="grade8">Grade 8 (28 December 2025 to 04 January 2026)</option>
-                    <option value="grade7">Grade 7 (23 to 26 October 2025)</option>
-                    <option value="grade6">Grade 6 (26 to 28 September 2025)</option>
-                    <option value="grade5">Grade 5 (12 to 14 September 2025)</option>
-                    <option value="grade4">Grade 4 (12 to 14 December 2025)</option>
-                    <option value="grade3">Grade 3 (21 to 23 November 2025)</option>
-                </select>
+    <div class="controls">
+        <select id="gradeSelect">
+            <option value="">Select Grade</option>
+        </select>
+        <button class="refresh-btn" id="refreshBtn">🔄 Refresh Data</button>
+    </div>
+
+    <div id="lastUpdated" style="text-align:center; margin-bottom:15px; font-size:0.9rem; color:#555;"></div>
+
+    <div id="summary" class="summary" style="display: none;">
+        <h3>Class Summary</h3>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <span class="number" id="totalStudents">0</span>
+                <span class="label">Total Registrations</span>
             </div>
-            <button class="refresh-btn" onclick="refreshData()">🔄 Refresh Data</button>
-        </div>
-
-        <div id="summary" class="summary" style="display: none;">
-            <h3>Class Summary / வகுப்பு சுருக்கம்</h3>
-            <div class="summary-grid">
-                <div class="summary-item">
-                    <span class="number" id="totalStudents">0</span>
-                    <span class="label">Total Registrations<br>மொத்த பதிவுகள்</span>
-                </div>
-                <div class="summary-item">
-                    <span class="number" id="paidCount">0</span>
-                    <span class="label">Fees Paid<br>கட்டணம் செலுத்தியவர்கள்</span>
-                </div>
-                <div class="summary-item">
-                    <span class="number" id="unpaidCount">0</span>
-                    <span class="label">Fees Pending<br>கட்டணம் நிலுவையில்</span>
-                </div>
-                <div class="summary-item">
-                    <span class="number" id="studentCount">0</span>
-                    <span class="label">Students<br>மாணவர்கள்</span>
-                </div>
-                <div class="summary-item">
-                    <span class="number" id="auditorCount">0</span>
-                    <span class="label">Auditors<br>ஆய்வாளர்கள்</span>
-                </div>
+            <div class="summary-item">
+                <span class="number" id="paidCount">0</span>
+                <span class="label">Fees Paid</span>
             </div>
-        </div>
-
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Timestamp<br>நேர முத்திரை</th>
-                        <th>Student/Auditor<br>மாணவர்/ஆய்வாளர்</th>
-                        <th>Name<br>பெயர்</th>
-                        <th>Mode of Attendance<br>பங்கேற்பு முறை</th>
-                        <th>Fees Status<br>கட்டணம் நிலை</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td colspan="5" class="no-data">
-                            Please select a grade to view registration data<br>
-                            பதிவு தரவைப் பார்க்க ஒரு வகுப்பைத் தேர்ந்தெடுக்கவும்
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="summary-item">
+                <span class="number" id="unpaidCount">0</span>
+                <span class="label">Fees Pending</span>
+            </div>
+            <div class="summary-item">
+                <span class="number" id="studentCount">0</span>
+                <span class="label">Students</span>
+            </div>
+            <div class="summary-item">
+                <span class="number" id="auditorCount">0</span>
+                <span class="label">Auditors</span>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Configuration and data will be loaded from JSON files
-        let classesConfig = {};
-        let sampleData = {};
-        
-        // Load configuration and initialize the dashboard
-        async function initializeDashboard() {
-            try {
-                // Load classes configuration
-                const configResponse = await fetch('./classes.json');
-                classesConfig = await configResponse.json();
-                
-                // Load sample data
-                const dataResponse = await fetch('./data.json');
-                sampleData = await dataResponse.json();
-                
-                // Populate dropdown with classes from config
-                populateClassDropdown();
-                
-            } catch (error) {
-                console.error('Error loading configuration:', error);
-                // Fallback to hardcoded data if JSON files are not available
-                loadFallbackData();
-            }
-        }
-        
-        function populateClassDropdown() {
-            const gradeSelect = document.getElementById('gradeSelect');
-            
-            // Clear existing options except the first one
-            while (gradeSelect.children.length > 1) {
-                gradeSelect.removeChild(gradeSelect.lastChild);
-            }
-            
-            // Add options from configuration
-            Object.entries(classesConfig.classes).forEach(([key, classInfo]) => {
-                if (classInfo.active) {
-                    const option = document.createElement('option');
-                    option.value = key;
-                    option.textContent = `${classInfo.name} (${classInfo.dates})`;
-                    gradeSelect.appendChild(option);
-                }
-            });
-        }
-        
-        function loadFallbackData() {
-            // Fallback configuration and data
-            classesConfig = {
-                classes: {
-                    grade8: {
-                        name: "Grade 8",
-                        dates: "28 December 2025 to 04 January 2026",
-                        sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk",
-                        active: true
-                    },
-                    grade7: {
-                        name: "Grade 7",
-                        dates: "23 to 26 October 2025",
-                        sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE",
-                        active: true
-                    },
-                    grade6: {
-                        name: "Grade 6",
-                        dates: "26 to 28 September 2025",
-                        sheetId: "1YOYIWBoMGcbPEXzK_kY0goS0wn_6gqXHDdGY8Sl6Nr0",
-                        active: true
-                    },
-                    grade5: {
-                        name: "Grade 5",
-                        dates: "12 to 14 September 2025",
-                        sheetId: "1Pjep3A_jLcKPNvLvJNfHxUQK4_ytxGorw6yVjsU8eJw",
-                        active: true
-                    },
-                    grade4: {
-                        name: "Grade 4",
-                        dates: "12 to 14 December 2025",
-                        sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ",
-                        active: true
-                    },
-                    grade3: {
-                        name: "Grade 3",
-                        dates: "21 to 23 November 2025",
-                        sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y",
-                        active: true
-                    }
-                }
-            };
+    <div class="table-container">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Mode of Attendance</th>
+                    <th>Fees Status</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr>
+                    <td colspan="5" class="no-data">Please select a grade to view registration data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-            sampleData = {
-                grade8: [
-                    {
-                        timestamp: "2024-12-20 10:30:00",
-                        type: "Student / மாணவர்",
-                        name: "Arjun Kumar / அர்ஜுன் குமார்",
-                        modeOfAttendance: "Online / ஆன்லைன்",
-                        feesPaid: "Yes / ஆம்"
-                    },
-                    {
-                        timestamp: "2024-12-20 11:15:00",
-                        type: "Auditor / ஆய்வாளர்",
-                        name: "Priya Sharma / பிரியா சர்மா",
-                        modeOfAttendance: "Offline / ஆஃப்லைன்",
-                        feesPaid: "No / இல்லை"
-                    },
-                    {
-                        timestamp: "2024-12-20 14:45:00",
-                        type: "Student / மாணவர்",
-                        name: "Ravi Patel / ரவி பட்டேல்",
-                        modeOfAttendance: "Hybrid / கலப்பு",
-                        feesPaid: "Yes / ஆம்"
-                    }
-                ],
-                grade7: [
-                    {
-                        timestamp: "2024-10-15 09:20:00",
-                        type: "Student / மாணவர்",
-                        name: "Meera Singh / மீரா சிங்",
-                        modeOfAttendance: "Online / ஆன்லைன்",
-                        feesPaid: "Yes / ஆம்"
-                    },
-                    {
-                        timestamp: "2024-10-15 13:30:00",
-                        type: "Student / மாணவர்",
-                        name: "Karthik Raja / கார்த்திக் ராஜா",
-                        modeOfAttendance: "Offline / ஆஃப்லைன்",
-                        feesPaid: "No / இல்லை"
-                    }
-                ],
-                grade6: [
-                    {
-                        timestamp: "2024-09-20 08:45:00",
-                        type: "Auditor / ஆய்வாளர்",
-                        name: "Anjali Reddy / அஞ்சலி ரெட்டி",
-                        modeOfAttendance: "Online / ஆன்லைன்",
-                        feesPaid: "Yes / ஆம்"
-                    }
-                ],
-                grade5: [
-                    {
-                        timestamp: "2024-09-10 16:20:00",
-                        type: "Student / மாணவர்",
-                        name: "Vijay Kumar / விஜய் குமார்",
-                        modeOfAttendance: "Hybrid / கலப்பு",
-                        feesPaid: "Yes / ஆம்"
-                    }
-                ],
-                grade4: [
-                    {
-                        timestamp: "2024-12-05 12:00:00",
-                        type: "Student / மாணவர்",
-                        name: "Lakshmi Devi / லட்சுமி தேவி",
-                        modeOfAttendance: "Offline / ஆஃப்லைன்",
-                        feesPaid: "No / இல்லை"
-                    }
-                ],
-                grade3: [
-                    {
-                        timestamp: "2024-11-18 15:30:00",
-                        type: "Auditor / ஆய்வாளர்",
-                        name: "Suresh Babu / சுரேஷ் பாபு",
-                        modeOfAttendance: "Online / ஆன்லைன்",
-                        feesPaid: "Yes / ஆம்"
-                    }
-                ]
-            };
-            
-            populateClassDropdown();
-        }
-
-        function loadGradeData(grade) {
-            const data = sampleData[grade] || [];
-            const tableBody = document.getElementById('tableBody');
-            const summary = document.getElementById('summary');
-            
-            if (data.length === 0) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="no-data">
-                            No registration data found for this grade<br>
-                            இந்த வகுப்பிற்கு பதிவு தரவு கிடைக்கவில்லை
-                        </td>
-                    </tr>
-                `;
-                summary.style.display = 'none';
-                return;
-            }
-
-            // Calculate summary statistics
-            let totalStudents = data.length;
-            let paidCount = 0;
-            let unpaidCount = 0;
-            let studentCount = 0;
-            let auditorCount = 0;
-
-            data.forEach(record => {
-                if (record.feesPaid.includes('Yes') || record.feesPaid.includes('ஆம்')) {
-                    paidCount++;
-                } else {
-                    unpaidCount++;
-                }
-
-                if (record.type.includes('Student') || record.type.includes('மாணவர்')) {
-                    studentCount++;
-                } else {
-                    auditorCount++;
-                }
-            });
-
-            // Update summary
-            document.getElementById('totalStudents').textContent = totalStudents;
-            document.getElementById('paidCount').textContent = paidCount;
-            document.getElementById('unpaidCount').textContent = unpaidCount;
-            document.getElementById('studentCount').textContent = studentCount;
-            document.getElementById('auditorCount').textContent = auditorCount;
-            summary.style.display = 'block';
-
-            // Populate table
-            tableBody.innerHTML = data.map(record => {
-                const feesBadge = record.feesPaid.includes('Yes') || record.feesPaid.includes('ஆம்') 
-                    ? '<span class="status-paid">Paid / செலுத்தப்பட்டது</span>'
-                    : '<span class="status-unpaid">Pending / நிலுவையில்</span>';
-                
-                const typeBadge = record.type.includes('Student') || record.type.includes('மாணவர்')
-                    ? '<span class="student-badge">Student / மாணவர்</span>'
-                    : '<span class="auditor-badge">Auditor / ஆய்வாளர்</span>';
-
-                const modeBadge = getModeBadge(record.modeOfAttendance || 'Not specified / குறிப்பிடப்படவில்லை');
-
-                return `
-                    <tr>
-                        <td>${formatTimestamp(record.timestamp)}</td>
-                        <td>${typeBadge}</td>
-                        <td>${record.name}</td>
-                        <td>${modeBadge}</td>
-                        <td>${feesBadge}</td>
-                    </tr>
-                `;
-            }).join('');
-        }
-
-        function getModeBadge(mode) {
-            if (mode.includes('Online') || mode.includes('ஆன்லைன்')) {
-                return '<span class="mode-online">Online / ஆன்லайன்</span>';
-            } else if (mode.includes('Offline') || mode.includes('ஆஃப்லைன்')) {
-                return '<span class="mode-offline">Offline / ஆஃப்லைன்</span>';
-            } else if (mode.includes('Hybrid') || mode.includes('கலப்பு')) {
-                return '<span class="mode-hybrid">Hybrid / கலப்பு</span>';
-            } else {
-                return '<span class="mode-unknown">Not Specified / குறிப்பிடப்படவில்லை</span>';
-            }
-        }
-
-        function formatTimestamp(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleString('en-IN', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        function refreshData() {
-            const selectedGrade = document.getElementById('gradeSelect').value;
-            if (selectedGrade) {
-                loadGradeData(selectedGrade);
-                
-                // Show refresh animation
-                const btn = event.target;
-                btn.style.transform = 'rotate(360deg)';
-                setTimeout(() => {
-                    btn.style.transform = '';
-                }, 500);
-            }
-        }
-
-        // Event listener for grade selection
-        document.getElementById('gradeSelect').addEventListener('change', function() {
-            const selectedGrade = this.value;
-            if (selectedGrade) {
-                loadGradeData(selectedGrade);
-            } else {
-                document.getElementById('summary').style.display = 'none';
-                document.getElementById('tableBody').innerHTML = `
-                    <tr>
-                        <td colspan="5" class="no-data">
-                            Please select a grade to view registration data<br>
-                            பதிவு தரவைப் பார்க்க ஒரு வகுப்பைத் தேர்ந்தெடுக்கவும்
-                        </td>
-                    </tr>
-                `;
-            }
-        });
-
-        // Auto-refresh data every 5 minutes
-        setInterval(() => {
-            const selectedGrade = document.getElementById('gradeSelect').value;
-            if (selectedGrade) {
-                loadGradeData(selectedGrade);
-            }
-        }, 300000);
-
-        // Initialize the dashboard when page loads
-        document.addEventListener('DOMContentLoaded', initializeDashboard);
-    </script>
+<script src="script.js"></script>
 </body>
 </html>

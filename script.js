@@ -21,18 +21,19 @@ const overlay     = document.getElementById("loadingOverlay");
 const copyAllWrap = document.getElementById("copyAllWrap");
 const copyAllBtn  = document.getElementById("copyAllBtn");
 
-// ===== Seminar dates with weekday + TZ =====
-function formatSeminarDates([startISO, endISO]) {
+// ===== Seminar dates (no weekday, simpler) =====
+function formatSeminarDatesSimple([startISO, endISO]) {
   const start = new Date(startISO);
   const end   = new Date(endISO);
-  const full  = { weekday: "long", day: "2-digit", month: "long", year: "numeric", timeZoneName: "short" };
-  const shortD= { weekday: "long", day: "2-digit" };
+  const opts  = { day: "2-digit", month: "long", year: "numeric" };
+
   const sameYear  = start.getFullYear() === end.getFullYear();
   const sameMonth = start.getMonth() === end.getMonth();
+
   if (sameYear && sameMonth) {
-    return `${new Intl.DateTimeFormat(navigator.language, shortD).format(start)} – ${new Intl.DateTimeFormat(navigator.language, full).format(end)}`;
+    return `${new Intl.DateTimeFormat(navigator.language, opts).format(start)} – ${new Intl.DateTimeFormat(navigator.language, opts).format(end)}`;
   }
-  return `${new Intl.DateTimeFormat(navigator.language, full).format(start)} – ${new Intl.DateTimeFormat(navigator.language, full).format(end)}`;
+  return `${new Intl.DateTimeFormat(navigator.language, opts).format(start)} – ${new Intl.DateTimeFormat(navigator.language, opts).format(end)}`;
 }
 
 // ===== Populate dropdown =====
@@ -42,7 +43,8 @@ function populateClassDropdown() {
     if (!c.active) return;
     const opt = document.createElement("option");
     opt.value = key;
-    opt.textContent = `${c.name} (${formatSeminarDates(c.dates)})`;
+    // use simple date format (no weekday)
+    opt.textContent = `${c.name} (${formatSeminarDatesSimple(c.dates)})`;
     gradeSelect.appendChild(opt);
   });
 }
@@ -204,7 +206,7 @@ async function loadGradeData(gradeKey) {
     document.getElementById("auditorCount").textContent  = auditors;
     summaryEl.style.display = "block";
 
-    // Table (desktop layout; horizontal scroll on small)
+    // Table
     tableBody.innerHTML = data.map(r => `
       <tr>
         <td>${formatTimestamp(r.timestamp)}</td>
@@ -215,7 +217,7 @@ async function loadGradeData(gradeKey) {
       </tr>
     `).join("");
 
-    // ----- Build copy-all payload with grade title -----
+    // ----- Build copy-all payload with grade title (simple date format) -----
     const lines = data
       .map(r => {
         const name = (r.name || "").trim();
@@ -225,7 +227,7 @@ async function loadGradeData(gradeKey) {
       .filter(Boolean);
 
     if (lines.length > 0) {
-      const gradeTitle = `${info.name} (${formatSeminarDates(info.dates)})`;
+      const gradeTitle = `${info.name} (${formatSeminarDatesSimple(info.dates)})`;
       const copyText = [gradeTitle, ""].concat(lines).join("\n");
 
       copyAllWrap.style.display = "flex";
@@ -244,7 +246,6 @@ async function loadGradeData(gradeKey) {
     } else {
       copyAllWrap.style.display = "none";
     }
-    // -----------------------------------------------
 
     updateLastUpdated();
   } catch (e) {

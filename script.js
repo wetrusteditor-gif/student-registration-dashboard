@@ -113,7 +113,7 @@ function formatTimestamp(ts) {
 function getModeBadge(val) {
   const v = (val || "").toLowerCase();
   if (v.includes("online") || v.includes("ஆன்லைன்"))  return '<span class="mode-online">Online / ஆன்லைன்</span>';
-  if (v.includes("offline") || v.includes("ஆஃப்லைன்")) return '<span class="mode-offline">Offline / ஆஃப்லைன்</span>';
+  if (v.includes("direct") || v.includes("நேரடி")) return '<span class="mode-direct">Direct / நேரடி</span>';
   if (v.includes("hybrid") || v.includes("கலப்பு"))   return '<span class="mode-hybrid">Hybrid / கலப்பு</span>';
   return '<span class="mode-unknown">Not Specified / குறிப்பிடப்படவில்லை</span>';
 }

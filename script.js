@@ -1,42 +1,12 @@
 // ===== CONFIG (your sheet IDs + ISO date ranges) =====
 const appConfig = {
   classes: {
-    grade8: {
-      name: "Grade 8",
-      dates: ["2025-12-28", "2026-01-04"],
-      sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk",
-      active: true
-    },
-    grade7: {
-      name: "Grade 7",
-      dates: ["2025-10-23", "2025-10-26"],
-      sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE",
-      active: true
-    },
-    grade6: {
-      name: "Grade 6",
-      dates: ["2025-09-26", "2025-09-28"],
-      sheetId: "1YOYIWBoMGcbPEXzK_kY0goS0wn_6gqXHDdGY8Sl6Nr0",
-      active: true
-    },
-    grade5: {
-      name: "Grade 5",
-      dates: ["2025-09-12", "2025-09-14"],
-      sheetId: "1Pjep3A_jLcKPNvLvJNfHxUQK4_ytxGorw6yVjsU8eJw",
-      active: true
-    },
-    grade4: {
-      name: "Grade 4",
-      dates: ["2025-12-12", "2025-12-14"],
-      sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ",
-      active: true
-    },
-    grade3: {
-      name: "Grade 3",
-      dates: ["2025-11-21", "2025-11-23"],
-      sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y",
-      active: true
-    }
+    grade8: { name: "Grade 8", dates: ["2025-12-28","2026-01-04"], sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk", active: true },
+    grade7: { name: "Grade 7", dates: ["2025-10-23","2025-10-26"], sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE", active: true },
+    grade6: { name: "Grade 6", dates: ["2025-09-26","2025-09-28"], sheetId: "1YOYIWBoMGcbPEXzK_kY0goS0wn_6gqXHDdGY8Sl6Nr0", active: true },
+    grade5: { name: "Grade 5", dates: ["2025-09-12","2025-09-14"], sheetId: "1Pjep3A_jLcKPNvLvJNfHxUQK4_ytxGorw6yVjsU8eJw", active: true },
+    grade4: { name: "Grade 4", dates: ["2025-12-12","2025-12-14"], sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ", active: true },
+    grade3: { name: "Grade 3", dates: ["2025-11-21","2025-11-23"], sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y", active: true }
   },
   settings: { autoRefreshInterval: 300000 } // 5 minutes
 };
@@ -143,7 +113,7 @@ function formatTimestamp(ts) {
 function getModeBadge(val) {
   const v = (val || "").toLowerCase();
   if (v.includes("online") || v.includes("ஆன்லைன்"))  return '<span class="mode-online">Online / ஆன்லைன்</span>';
-  if (v.includes("direct") || v.includes("நேரடி")) return '<span class="mode-direct">Direct / நேரடி</span>';
+  if (v.includes("offline") || v.includes("ஆஃப்லைன்")) return '<span class="mode-offline">Offline / ஆஃப்லைன்</span>';
   if (v.includes("hybrid") || v.includes("கலப்பு"))   return '<span class="mode-hybrid">Hybrid / கலப்பு</span>';
   return '<span class="mode-unknown">Not Specified / குறிப்பிடப்படவில்லை</span>';
 }
@@ -222,14 +192,14 @@ async function loadGradeData(gradeKey) {
     document.getElementById("auditorCount").textContent  = auditors;
     summaryEl.style.display = "block";
 
-    // Table (adds data-labels for mobile card view)
+    // Table (desktop layout on all screens; horizontal scroll on small)
     tableBody.innerHTML = data.map(r => `
       <tr>
-        <td data-label="Timestamp / நேர முத்திரை">${formatTimestamp(r.timestamp)}</td>
-        <td data-label="Student/Auditor / மாணவர்/ஆய்வாளர்">${getTypeBadge(r.type)}</td>
-        <td data-label="Name / பெயர்">${r.name || ""}</td>
-        <td data-label="Mode of Attendance / பங்கேற்பு முறை">${getModeBadge(r.mode)}</td>
-        <td data-label="Fees Status / கட்டணம் நிலை">${getFeesBadge(r.fees)}</td>
+        <td>${formatTimestamp(r.timestamp)}</td>
+        <td>${getTypeBadge(r.type)}</td>
+        <td>${r.name || ""}</td>
+        <td>${getModeBadge(r.mode)}</td>
+        <td>${getFeesBadge(r.fees)}</td>
       </tr>
     `).join("");
 

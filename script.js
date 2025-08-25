@@ -229,7 +229,7 @@ async function loadGradeData(gradeKey) {
       const copyText = [gradeTitle, ""].concat(lines).join("\n");
 
       copyAllWrap.style.display = "flex";
-      copyAllBtn.textContent = `📋 Copy Names & Modes (${lines.length})`;
+      copyAllBtn.textContent = `📋 Copy Names (${lines.length})`;
 
       copyAllBtn.onclick = async () => {
         try {

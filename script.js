@@ -8,11 +8,11 @@ const appConfig = {
     grade4: { name: "Grade 4", dates: ["2025-12-12","2025-12-14"], sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ", active: false },
     grade3: { name: "Grade 3", dates: ["2026-03-13","2026-03-15"], sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y", active: true },
     grade2: { name: "Grade 2", dates: ["2026-02-27","2026-03-01"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: true },
-    ThirumanamOruAanmegam: { name: "Thirumanam Oru Aanmegam", dates: ["2026-03-22"], sheetId: "1OAaWqC1H9C4e49Ega38Y1DFgPwR4YJ_f45rWqW__ZCw", active: true },
-    SelfCultivation: { name: "Self Cultivation", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false },
-    ThannaiArinthal1: { name: "Thannai Arinthal 1", dates: ["2026-03-27","2026-03-29"], sheetId: "1NTPDM_MNtcjDuofvQe1ik82AtR8kC2nFEY53dZynkVQ", active: true },
-    ThannaiArinthal2: { name: "Thannai Arinthal 2", dates: ["2025-11-14","2025-11-16"], sheetId: "187433Me0TKKHOaBDUBX-TF5Uhm0vMyi9nm7IkIXeDs0", active: false },
-    GLSC: { name: "GLSC", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false }
+    thirumanamoruaanmegam: { name: "Thirumanam Oru Aanmegam", dates: ["2026-03-22"], sheetId: "1TIG9fLWeO14s-_MjXNmIJm186H9kXk4gd9j7nAfss14", active: true },
+    selfcultivation: { name: "Self Cultivation", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false },
+    thannaiarinthal1: { name: "Thannai Arinthal 1", dates: ["2026-03-27","2026-03-29"], sheetId: "1LPETFEtt9SoD-8mJFYG3528L4mb1Ou-lNVOvzIzgML8", active: true },
+    thannaiarinthal2: { name: "Thannai Arinthal 2", dates: ["2025-11-14","2025-11-16"], sheetId: "187433Me0TKKHOaBDUBX-TF5Uhm0vMyi9nm7IkIXeDs0", active: false },
+    glsc: { name: "GLSC", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false }
   },
   settings: { autoRefreshInterval: 300000 } // 5 minutes
 };

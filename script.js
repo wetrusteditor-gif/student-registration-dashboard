@@ -1,13 +1,18 @@
 // ===== CONFIG (your sheet IDs + ISO date ranges) =====
 const appConfig = {
   classes: {
-    grade8: { name: "Grade 8", dates: ["2025-12-28","2026-01-04"], sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk", active: true },
-    grade7: { name: "Grade 7", dates: ["2025-10-23","2025-10-26"], sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE", active: true },
+    grade8: { name: "Grade 8", dates: ["2026-12-20","2026-12-27"], sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk", active: false },
+    grade7: { name: "Grade 7", dates: ["2025-10-23","2025-10-26"], sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE", active: false },
     grade6: { name: "Grade 6", dates: ["2026-02-13","2026-02-15"], sheetId: "1YOYIWBoMGcbPEXzK_kY0goS0wn_6gqXHDdGY8Sl6Nr0", active: true },
-    grade5: { name: "Grade 5", dates: ["2025-09-12","2025-09-14"], sheetId: "1Pjep3A_jLcKPNvLvJNfHxUQK4_ytxGorw6yVjsU8eJw", active: true },
-    grade4: { name: "Grade 4", dates: ["2025-12-12","2025-12-14"], sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ", active: true },
-    grade3: { name: "Grade 3", dates: ["2025-12-05","2025-12-07"], sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y", active: true },
-    grade2: { name: "Grade 2", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: true }
+    grade5: { name: "Grade 5", dates: ["2025-09-12","2025-09-14"], sheetId: "1Pjep3A_jLcKPNvLvJNfHxUQK4_ytxGorw6yVjsU8eJw", active: false },
+    grade4: { name: "Grade 4", dates: ["2025-12-12","2025-12-14"], sheetId: "1yI0J2L8A4KqXAXECsvz22pN7dPBfSoNVkc7tn2OrUlQ", active: false },
+    grade3: { name: "Grade 3", dates: ["2026-03-13","2026-03-15"], sheetId: "1IoPOwJHK3ogI8uMKFp3FCihRDoz0iXeyhrr5HJ3Zw4Y", active: true },
+    grade2: { name: "Grade 2", dates: ["2026-02-27","2026-03-01"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: true },
+    ThirumanamOruAanmegam: { name: "Thirumanam Oru Aanmegam", dates: ["2026-03-22"], sheetId: "1OAaWqC1H9C4e49Ega38Y1DFgPwR4YJ_f45rWqW__ZCw", active: true },
+    SelfCultivation: { name: "Self Cultivation", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false },
+    ThannaiArinthal1: { name: "Thannai Arinthal 1", dates: ["2026-03-27","2026-03-29"], sheetId: "1NTPDM_MNtcjDuofvQe1ik82AtR8kC2nFEY53dZynkVQ", active: true },
+    ThannaiArinthal2: { name: "Thannai Arinthal 2", dates: ["2025-11-14","2025-11-16"], sheetId: "187433Me0TKKHOaBDUBX-TF5Uhm0vMyi9nm7IkIXeDs0", active: false },
+    GLSC: { name: "GLSC", dates: ["2025-11-14","2025-11-16"], sheetId: "1nuHgU6NJ9J9BnysCma_IkSic_zbyNGqIlhI7FzoAPbc", active: false }
   },
   settings: { autoRefreshInterval: 300000 } // 5 minutes
 };

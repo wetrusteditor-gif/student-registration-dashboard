@@ -2,7 +2,7 @@
 const appConfig = {
   classes: {
     grade8: { name: "Grade 8", dates: ["2026-12-20","2026-12-27"], sheetId: "1y7C5PhSipW1_MoMcR64AVmOyMqG-GyYtrj0CM8KOBwk", active: false },
-    grade7: { name: "Grade 7", dates: ["2025-10-23","2025-10-26"], sheetId: "1Mjhnpudyy-F6fX4g0fpm6jnFlzoWir4Kl9fQZxPirjE", active: false },
+    grade7: { name: "Grade 7", dates: ["2026-07-23","2026-07-26"], sheetId: "125BytI3iNz0J8HbHHIbhDUZsCd3wda3LvHTK2kFOZjk", active: true },
     grade6: { name: "Grade 6", dates: ["2026-02-13","2026-02-15"], sheetId: "1YOYIWBoMGcbPEXzK_kY0goS0wn_6gqXHDdGY8Sl6Nr0", active: false },
     grade5: { name: "Grade 5", dates: ["2025-04-17","2025-04-19"], sheetId: "1o91dKeIeW_jB5XN4CKd3y9oso498D9wBfuL4K5g-QdI", active: false },
     grade4: { name: "Grade 4", dates: ["2025-04-10","2025-04-12"], sheetId: "1rE47CRK5q-A5qSUa3rrQy_czukUq8UMi5ueU5o2UarQ", active: false },
